@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TassarnasHusApi", "TassarnasHusApi.csproj", "{E10A54A1-73E8-72E4-5367-17755D06F3B4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E10A54A1-73E8-72E4-5367-17755D06F3B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E10A54A1-73E8-72E4-5367-17755D06F3B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E10A54A1-73E8-72E4-5367-17755D06F3B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E10A54A1-73E8-72E4-5367-17755D06F3B4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3F4A4DC3-EF8D-4356-A1B0-A406F6BC394E}
+	EndGlobalSection
+EndGlobal
