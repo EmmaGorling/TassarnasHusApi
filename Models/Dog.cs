@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TassarnasHusApi.Models;
 
-public class DogModel {
+public class Dog {
     public int Id { get; set; }
     [Required]
     [Display(Name = "Namn")]
