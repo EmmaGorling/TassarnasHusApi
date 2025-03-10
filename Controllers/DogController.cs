@@ -11,6 +11,7 @@ using TassarnasHusApi.Data;
 using TassarnasHusApi.Models;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
+using SixLabors.ImageSharp.Formats.Jpeg;
 
 namespace TassarnasHusApi.Controllers
 {
@@ -71,20 +72,18 @@ namespace TassarnasHusApi.Controllers
                     // Generate unique filename
                     string fileName = Path.GetFileNameWithoutExtension(dog.ImageFile.FileName);
                     string extension = Path.GetExtension(dog.ImageFile.FileName);
-                    dog.ImageName = fileName = fileName.Replace(" ", string.Empty) + DateTime.Now.ToString("yymmssff") + extension;
+                    dog.ImageName = fileName = fileName.Replace(" ", string.Empty) + DateTime.Now.ToString("yymmssfff") + extension;
 
                     string path = Path.Combine(wwwRootPath + "/dogImages", fileName);
 
-                    // Stroe in filesystem
-                    using(var fileStream = new FileStream(path, FileMode.Create)) {
-                        await dog.ImageFile.CopyToAsync(fileStream);
-                    };
+                    // Resize and store in filestystem
+                    await ResizeAndSaveImage(dog.ImageFile,path);
                 } else {
                     dog.ImageName = "default.png";
                 }
                 _context.Add(dog);
                 // Add logged in user
-                dog.CreatedBy = User.Identity?.Name ?? "Unknown";
+                dog.CreatedBy = User.Identity?.Name ?? "Okänd";
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -180,6 +179,21 @@ namespace TassarnasHusApi.Controllers
             return _context.Dogs.Any(e => e.Id == id);
         }
 
-        
+        public async Task ResizeAndSaveImage(IFormFile imageFile, string path)
+        {
+            using var memoryStream = new MemoryStream();
+            await imageFile.CopyToAsync(memoryStream);
+            memoryStream.Position = 0; // Reset position in stream
+
+            using var image = Image.Load(memoryStream);
+            image.Mutate(ctx => ctx.Resize(new ResizeOptions
+            {
+                Size = new Size(480, 600),
+                Mode = ResizeMode.Crop // Crop eccess
+            }));
+
+            // Save image as jpg with quality 90
+            await image.SaveAsync(path, new JpegEncoder { Quality = 90 });
+        }
     }
 }
