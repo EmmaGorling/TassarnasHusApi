@@ -111,18 +111,47 @@ namespace TassarnasHusApi.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Breed,City,Sex,Description,Age,Size,Adopted,ImageName")] Dog dog)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Breed,City,Sex,Description,Age,Size,Adopted,ImageFile")] Dog dog)
         {
             if (id != dog.Id)
             {
                 return NotFound();
             }
 
+            var existingDog = await _context.Dogs.FindAsync(id);
+            if (existingDog == null)
+            {
+                return NotFound();
+            }
+
             if (ModelState.IsValid)
             {
+                // If new image is added
+                if (dog.ImageFile != null) {
+                    // Delete old image, if not "default.png"
+                    if (!string.IsNullOrEmpty(existingDog.ImageName) && existingDog.ImageName != "default.png") {
+                        string oldPath = Path.Combine(wwwRootPath + "/dogImages" + existingDog.ImageName);
+                        if (System.IO.File.Exists(oldPath)) {
+                            System.IO.File.Delete(oldPath);
+                        }
+                    }
+
+                    // Generate unique filename
+                    string fileName = Path.GetFileNameWithoutExtension(dog.ImageFile.FileName);
+                    string extension = Path.GetExtension(dog.ImageFile.FileName);
+                    dog.ImageName = fileName = fileName.Replace(" ", string.Empty) + DateTime.Now.ToString("yymmssfff") + extension;
+
+                    string path = Path.Combine(wwwRootPath + "/dogImages", fileName);
+
+                    // Resize and store in filestystem
+                    await ResizeAndSaveImage(dog.ImageFile,path);
+                } else {
+                    // Keep old image if not any new
+                    dog.ImageName = existingDog.ImageName;
+                }
                 try
                 {
-                    _context.Update(dog);
+                    _context.Entry(existingDog).CurrentValues.SetValues(dog);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -167,6 +196,14 @@ namespace TassarnasHusApi.Controllers
             var dog = await _context.Dogs.FindAsync(id);
             if (dog != null)
             {
+                // Check if image is not null och default.png
+                if (!string.IsNullOrEmpty(dog.ImageName) && dog.ImageName != "default.png") {
+                    string path = Path.Combine(wwwRootPath + "/dogImages" + dog.ImageName);
+                    // Delete if exists
+                    if(System.IO.File.Exists(path)) {
+                        System.IO.File.Delete(path);
+                    }
+                }
                 _context.Dogs.Remove(dog);
             }
 
