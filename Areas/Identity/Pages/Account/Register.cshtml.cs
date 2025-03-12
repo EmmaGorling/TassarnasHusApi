@@ -71,11 +71,11 @@ namespace TassarnasHusApi.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "Vänligen ange ditt förnamn")]
             [Display(Name = "Förnamn")]
             public string FirstName { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Vänligen ange ditt efternamn")]
             [Display(Name = "Efternamn")]
             public string LastName { get; set; }
 
@@ -83,19 +83,19 @@ namespace TassarnasHusApi.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [EmailAddress]
-            [Display(Name = "Email")]
+            [Required(ErrorMessage = "Vänligen ange en giltig e-post")]
+            [EmailAddress(ErrorMessage = "Vänligen ange en giltig e-post")]
+            [Display(Name = "E-post")]
             public string Email { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [Required(ErrorMessage = "Vänligen ange ett lösenord")]
+            [StringLength(100, ErrorMessage = "Lösenordet måste vara minst {2} och max max {1} tecken långt.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "Lösenord")]
             public string Password { get; set; }
 
             /// <summary>
@@ -103,8 +103,8 @@ namespace TassarnasHusApi.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Display(Name = "Bekräfta lösenord")]
+            [Compare("Password", ErrorMessage = "Lösenorden matchar inte")]
             public string ConfirmPassword { get; set; }
         }
 
