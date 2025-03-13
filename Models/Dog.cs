@@ -37,4 +37,6 @@ public class Dog {
     [Display(Name = "Bild")]
     public IFormFile? ImageFile { get; set; }
     public string? CreatedBy { get; set; }
+    [Display(Name = "Ansökningar")]
+    public List<Application>? Applications { get; set; }
 }

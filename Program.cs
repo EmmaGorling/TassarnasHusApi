@@ -29,6 +29,9 @@ else
     app.UseHsts();
 }
 
+// Use static files
+app.UseStaticFiles();
+
 app.UseHttpsRedirection();
 app.UseRouting();
 
