@@ -17,7 +17,7 @@
                                 <img src="~/newsImages/@news.ImageName" class="card-img-top" alt="">
                                 <div class="card-body">
                                     <h4 class="card-title">@news.Title</h4>
-                                    <span>@news.CreatedAt</span>
+                                    <span>@news.CreatedAt.ToString("yyyy-MM-dd")</span>
                                     @{
                                         string shortDescription = "";
                                         if (!string.IsNullOrEmpty(news.Content)) 

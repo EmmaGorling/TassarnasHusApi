@@ -87,8 +87,9 @@ namespace TassarnasHusApi.Controllers
             if (application == null)
             {
                 return NotFound();
-            }
-            ViewData["DogId"] = new SelectList(_context.Dogs, "Id", "Breed", application.DogId);
+            } 
+            
+            
             return View(application);
         }
 
