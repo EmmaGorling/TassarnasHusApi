@@ -1,4 +1,7 @@
 @model TassarnasHusApi.Models.Dog
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 
 @{
     ViewData["Title"] = "Details";
@@ -79,6 +82,14 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    @if(!SignInManager.IsSignedIn(User)) {
+        <a href="@Url.Action("Create", "Application", new { dogId = (int)Model.Id, dogName = Model.Name })" class="btn btn-success">
+        Gör en intresseanmälan
+        </a>
+    } else {
+        <div>
+            <a asp-action="Edit" asp-route-id="@Model?.Id">Redigera</a> |
+            <a asp-action="Index">Tillbaka till listan</a>
+        </div>
+    }
 </div>

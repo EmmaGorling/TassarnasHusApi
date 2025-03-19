@@ -1,5 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using TassarnasHusApi.Data;
 using TassarnasHusApi.Models;
 
 namespace TassarnasHusApi.Controllers;
@@ -7,15 +9,39 @@ namespace TassarnasHusApi.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private readonly ApplicationDbContext _context;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
     {
         _logger = logger;
+        _context = context;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        return View();
+        var latestNews = await _context.News
+            .OrderByDescending(n => n.CreatedAt)
+            .Take(5) // Hämta de 5 senaste nyheterna
+            .ToListAsync();
+        return View(latestNews);
+    }
+
+
+    public async Task<IActionResult> Dogs()
+    {
+        var dogs = await _context.Dogs
+            .ToListAsync();
+
+        return View(dogs);
+    }
+
+
+    public async Task<IActionResult> News()
+    {
+        var news = await _context.News
+            .ToListAsync();
+        
+        return View(news);
     }
 
     public IActionResult Privacy()

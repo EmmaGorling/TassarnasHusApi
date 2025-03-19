@@ -1,0 +1,49 @@
+@model List<TassarnasHusApi.Models.Dog>;
+
+@{
+    ViewData["Title"] = "Våra hundar";
+}
+
+<div>
+    <h1>@ViewData["Title"]</h1>
+
+    @if (Model != null)
+            {
+                <div class="row w-100">
+                    @foreach (var dog in Model)
+                    {
+                        <div class="col-md-4">
+                            <div class="card mb-3">
+                                <img src="~/dogImages/@dog.ImageName" class="card-img-top" alt="@dog.Name">
+                                <div class="card-body">
+                                    <p>@dog.City</p>
+                                    <h4 class="card-title">@dog.Name</h4>
+                                    <p><span>Ras:</span> @dog.Breed</p>
+                                    <p><span>Ålder:</span> @dog.Age år</p>
+                                    <p><span>Kön:</span> @dog.Sex</p>
+                                    @{
+                                        string shortDescription = "";
+                                        if (!string.IsNullOrEmpty(dog.Description)) 
+                                        {
+                                            var words = dog.Description.Split(' ').Take(30);
+                                            shortDescription = string.Join(" ", words) + (dog.Description.Split(' ').Length > 25 ? "..." : "");
+                                        }
+                                    }
+
+                                    <p>
+                                        <span>Om @dog.Name</span>
+                                        <br>  
+                                        @shortDescription
+                                    </p>
+                                    <a asp-controller="Dog" asp-action="Details" asp-route-id="@dog.Id" class="btn btn-primary">Läs mer</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <p>Inga hundar finns just nu.</p>
+            }
+</div>

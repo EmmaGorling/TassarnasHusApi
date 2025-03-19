@@ -1,0 +1,44 @@
+@model List<TassarnasHusApi.Models.News>
+
+@{
+    ViewData["Title"] = "Aktuellt";
+}
+
+<div>
+    <h1>@ViewData["Title"]</h1>
+
+    @if (Model != null)
+            {
+                <div class="row w-100">
+                    @foreach (var news in Model)
+                    {
+                        <div class="col-md-4">
+                            <div class="card mb-3">
+                                <img src="~/newsImages/@news.ImageName" class="card-img-top" alt="">
+                                <div class="card-body">
+                                    <h4 class="card-title">@news.Title</h4>
+                                    <span>@news.CreatedAt</span>
+                                    @{
+                                        string shortDescription = "";
+                                        if (!string.IsNullOrEmpty(news.Content)) 
+                                        {
+                                            var words = news.Content.Split(' ').Take(30);
+                                            shortDescription = string.Join(" ", words) + (news.Content.Split(' ').Length > 25 ? "..." : "");
+                                        }
+                                    }
+
+                                    <p>
+                                        @shortDescription
+                                    </p>
+                                    <a asp-controller="News" asp-action="Details" asp-route-id="@news.Id" class="btn btn-primary">Läs mer</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <p>Det finns inga aktuella artiklar just nu.</p>
+            }
+</div>

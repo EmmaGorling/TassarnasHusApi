@@ -46,10 +46,16 @@ namespace TassarnasHusApi.Controllers
         }
 
         // GET: Application/Create
-        public IActionResult Create()
+        public IActionResult Create(int? dogId, string dogName)
         {
-            ViewData["DogId"] = new SelectList(_context.Dogs, "Id", "Breed");
-            return View();
+            var application = new Application();
+            if(dogId.HasValue) {
+                application.DogId = dogId.Value;
+            }
+            if(!string.IsNullOrEmpty(dogName)) {
+                ViewBag.dogName = dogName;
+            }
+            return View(application);
         }
 
         // POST: Application/Create
@@ -63,7 +69,7 @@ namespace TassarnasHusApi.Controllers
             {
                 _context.Add(application);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("DogDetails", "Home", new { id = application.DogId });
             }
             ViewData["DogId"] = new SelectList(_context.Dogs, "Id", "Breed", application.DogId);
             return View(application);

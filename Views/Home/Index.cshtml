@@ -1,8 +1,44 @@
-﻿@{
-    ViewData["Title"] = "Startsida";
+﻿@model List<TassarnasHusApi.Models.News>
+
+@{
+    ViewData["Title"] = "Välkommen!";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="">
+    <div class="hero-section">
+        <div class="hero-content p-2 bg-light bg-opacity-50 ">
+            <h1 class="text-danger-emphasis">Välkommen till hundvärlden!</h1>
+            <p class="text-black fw-semibold">
+                Tack vare att du adopterar en hund via oss får en fyrbent vän en andra chans till ett kärleksfullt hem. 
+                Du förändrar inte bara en hunds liv – du får en trogen vän för livet!
+            </p>
+        </div>
+    </div>
+    
+
+    <div>
+        <h2>Senaste nyheterna</h2>
+        @if (Model != null)
+            {
+                <div class="row w-100">
+                    @foreach (var news in Model)
+                    {
+                        <div class="col-md-4">
+                            <div class="card mb-3">
+                                <img src="~/newsImages/@news.ImageName" class="card-img-top" alt="@news.Title">
+                                <div class="card-body">
+                                    <h5 class="card-title">@news.Title</h5>
+                                    <p>@news.CreatedAt.ToString("d MMMM yyyy", new System.Globalization.CultureInfo("sv-SE"))</p>
+                                    <a href="@Url.Action("Details", "News", new { id = news.Id })" class="btn btn-primary">Läs mer</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <p>Inga nyheter finns just nu.</p>
+            }
+    </div>
 </div>

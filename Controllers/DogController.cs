@@ -12,6 +12,7 @@ using TassarnasHusApi.Models;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
 using SixLabors.ImageSharp.Formats.Jpeg;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TassarnasHusApi.Controllers
 {
@@ -53,6 +54,7 @@ namespace TassarnasHusApi.Controllers
         }
 
         // GET: Dog/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -63,6 +65,7 @@ namespace TassarnasHusApi.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("Id,Name,Breed,City,Sex,Description,Age,Size,Adopted,ImageFile")] Dog dog)
         {
             if (ModelState.IsValid)
@@ -91,6 +94,7 @@ namespace TassarnasHusApi.Controllers
         }
 
         // GET: Dog/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -111,6 +115,7 @@ namespace TassarnasHusApi.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Breed,City,Sex,Description,Age,Size,Adopted,ImageFile")] Dog dog)
         {
             if (id != dog.Id)
@@ -171,6 +176,7 @@ namespace TassarnasHusApi.Controllers
         }
 
         // GET: Dog/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -191,6 +197,7 @@ namespace TassarnasHusApi.Controllers
         // POST: Dog/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var dog = await _context.Dogs.FindAsync(id);
