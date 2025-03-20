@@ -1,54 +1,42 @@
 @model TassarnasHusApi.Models.Application
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Intresseanmälan";
 }
 
-<h1>Details</h1>
+<div class="container mt-5 max-w-800 mx-auto">
+    <h1 class=" text-center my-5">@ViewData["Title"]</h1>
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <p><span class="fw-semibold text-secondary-emphasis">Namn:</span> @Model.Name</p>
+            <p><span class="fw-semibold text-secondary-emphasis">E-post:</span> @Model.Email</p>
+            <p><span class="fw-semibold text-secondary-emphasis">Meddelande:</span>
+            <br> @Model.Message</p>
+            <p><span class="fw-semibold text-secondary-emphasis">Inskickad:</span> @Model.CreatedAt.ToString("d MMMM yyyy", new System.Globalization.CultureInfo("sv-SE"))</p>
+            <p><span class="fw-semibold text-secondary-emphasis">Hund:</span> @Model.Dog.Name</p>
+            <p
+                <span class="fw-semibold text-secondary-emphasis">Hanterad:</span>
+                @if (Model.Handeled)
+                {
+                    <span class="badge bg-success">Ja</span>
+                }
+                else
+                {
+                    <span class="badge bg-danger">Nej</span>
+                }
+            </p>
+        </div>
+    </div>
+    <div class="mt-4">
+        @if(SignInManager.IsSignedIn(User)){
+            <div>
+                <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-success">Hantera</a>
+                <a asp-action="Index" class="btn btn-primary">Tillbaka till listan</a>
+            </div>
+        }
+    </div>
+</div>
 
-<div>
-    <h4>Application</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Message)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Message)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Handeled)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Handeled)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreatedAt)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Dog)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Dog.Breed)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>

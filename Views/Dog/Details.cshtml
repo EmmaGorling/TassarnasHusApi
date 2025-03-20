@@ -11,38 +11,32 @@
 
 <div class="container mt-5 max-w-1100px mx-auto">
     <div class="row mb-4">
-        <!-- Bild -->
         <div class="col-md-6 mb-4 mb-md-0">
             <img src="~/dogImages/@Model.ImageName" class="img-fluid rounded" alt="@Model.Name">
         </div>
 
-        <!-- Hundens information -->
         <div class="col-md-6">
             <h1 class="display-4">@Model.Name</h1>
-            <p><span class="fw-semibold text-info">Placeringsort:</span> @Model.City</p>
-            <p><span class="fw-semibold text-info">Ras:</span> @Model.Breed</p>
-            <p><span class="fw-semibold text-info">Ålder:</span> @Model.Age år</p>
-            <p><span class="fw-semibold text-info">Kön:</span> @Model.Sex</p>
-            <p><span class="fw-semibold text-info">Uppe för adoption sedan:</span> @Model.CreatedAt.ToString("d MMMM yyyy", new System.Globalization.CultureInfo("sv-SE"))</p>
-            <p><span class="fw-semibold text-info">Kontaktperson:</span> @Model.CreatedBy</p>
+            <p><span class="fw-semibold text-secondary-emphasis">Placeringsort:</span> @Model.City</p>
+            <p><span class="fw-semibold text-secondary-emphasis">Ras:</span> @Model.Breed</p>
+            <p><span class="fw-semibold text-secondary-emphasis">Ålder:</span> @Model.Age år</p>
+            <p><span class="fw-semibold text-secondary-emphasis">Kön:</span> @Model.Sex</p>
+            <p><span class="fw-semibold text-secondary-emphasis">Uppe för adoption sedan:</span> @Model.CreatedAt.ToString("d MMMM yyyy", new System.Globalization.CultureInfo("sv-SE"))</p>
+            <p><span class="fw-semibold text-secondary-emphasis">Kontaktperson:</span> @Model.CreatedBy</p>
             @if(!SignInManager.IsSignedIn(User)) {
-                <a href="@Url.Action("Create", "Application", new { dogId = (int)Model.Id, dogName = Model.Name })" class="btn btn-info">
+                <a href="@Url.Action("Create", "Application", new { dogId = (int)Model.Id, dogName = Model.Name })" class="btn btn-primary">
                     Gör en intresseanmälan
                 </a>
             }
         </div>
     </div>
 
-    <!-- Beskrivning -->
     <div class="mb-4 max-w-800">
-        <h5 class="fw-semibold text-info">Om @Model.Name:</h5>
+        <h5 class="fw-semibold text-secondary-emphasis fs-3">Om @Model.Name:</h5>
         <p>@Model.Description</p>
     </div>
 
-    <!-- Intresseanmälan om inte inloggad -->
-    
 
-    <!-- Återvända knappar -->
     <div class="mt-4">
         @if(!SignInManager.IsSignedIn(User)) {
             <a asp-controller="Home" asp-action="Dogs" class="btn btn-primary">Tillbaka till hundarna</a>

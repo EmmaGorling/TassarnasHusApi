@@ -232,7 +232,7 @@ namespace TassarnasHusApi.Controllers
             using var image = Image.Load(memoryStream);
             image.Mutate(ctx => ctx.Resize(new ResizeOptions
             {
-                Size = new Size(480, 600),
+                Size = new Size(600, 480),
                 Mode = ResizeMode.Crop // Crop eccess
             }));
 

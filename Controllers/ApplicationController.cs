@@ -69,7 +69,7 @@ namespace TassarnasHusApi.Controllers
             {
                 _context.Add(application);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("DogDetails", "Home", new { id = application.DogId });
+                return RedirectToAction("Dogs", "Home", new { id = application.DogId });
             }
             ViewData["DogId"] = new SelectList(_context.Dogs, "Id", "Breed", application.DogId);
             return View(application);
@@ -83,7 +83,9 @@ namespace TassarnasHusApi.Controllers
                 return NotFound();
             }
 
-            var application = await _context.Applications.FindAsync(id);
+            var application = await _context.Applications
+                .Include(a => a.Dog)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (application == null)
             {
                 return NotFound();

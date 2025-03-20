@@ -5,8 +5,8 @@
 }
 
 <div class="container max-w-800 mx-auto">
-    <h1 class="text-danger my-4  text-center">@ViewData["Title"]</h1>
-    <h3 class="mb-4  text-center">Är du säker på att du vill ta bort denna hund?</h3>
+    <h1 class="text-center my-5">@ViewData["Title"]</h1>
+    <h3 class="mb-4  text-center text-danger">Är du säker på att du vill ta bort denna hund?</h3>
 
     <div class="card shadow p-4 mb-4">
         <div class="row">
@@ -22,34 +22,34 @@
             </div>
             <div class="col-md-6">
                 <dl class="row">
-                    <dt class="col-sm-4 fw-bold text-info">Namn:</dt>
+                    <dt class="col-sm-4 fw-bold text-secondary-emphasis">Namn:</dt>
                     <dd class="col-sm-8">@Html.DisplayFor(model => model.Name)</dd>
 
-                    <dt class="col-sm-4 fw-bold text-info">Ras:</dt>
+                    <dt class="col-sm-4 fw-bold text-secondary-emphasis">Ras:</dt>
                     <dd class="col-sm-8">@Html.DisplayFor(model => model.Breed)</dd>
 
-                    <dt class="col-sm-4 fw-bold text-info">Stad:</dt>
+                    <dt class="col-sm-4 fw-bold text-secondary-emphasis">Stad:</dt>
                     <dd class="col-sm-8">@Html.DisplayFor(model => model.City)</dd>
 
-                    <dt class="col-sm-4 fw-bold text-info">Kön:</dt>
+                    <dt class="col-sm-4 fw-bold text-secondary-emphasis">Kön:</dt>
                     <dd class="col-sm-8">@Html.DisplayFor(model => model.Sex)</dd>
 
-                    <dt class="col-sm-4 fw-bold text-info">Ålder:</dt>
+                    <dt class="col-sm-4 fw-bold text-secondary-emphasis">Ålder:</dt>
                     <dd class="col-sm-8">@Html.DisplayFor(model => model.Age)</dd>
 
-                    <dt class="col-sm-4 fw-bold text-info">Storlek:</dt>
+                    <dt class="col-sm-4 fw-bold text-secondary-emphasis">Storlek:</dt>
                     <dd class="col-sm-8">@Html.DisplayFor(model => model.Size)</dd>
 
-                    <dt class="col-sm-4 fw-bold text-info">Adopterad:</dt>
+                    <dt class="col-sm-4 fw-bold text-secondary-emphasis">Adopterad:</dt>
                     <dd class="col-sm-8">@Html.DisplayFor(model => model.Adopted)</dd>
 
-                    <dt class="col-sm-4 fw-bold text-info">Beskrivning:</dt>
+                    <dt class="col-sm-4 fw-bold text-secondary-emphasis">Beskrivning:</dt>
                     <dd class="col-sm-8">@Html.DisplayFor(model => model.Description)</dd>
 
-                    <dt class="col-sm-4 fw-bold text-info">Skapad av:</dt>
+                    <dt class="col-sm-4 fw-bold text-secondary-emphasis">Skapad av:</dt>
                     <dd class="col-sm-8">@Html.DisplayFor(model => model.CreatedBy)</dd>
 
-                    <dt class="col-sm-4 fw-bold text-info">Tillagd:</dt>
+                    <dt class="col-sm-4 fw-bold text-secondary-emphasis">Tillagd:</dt>
                     <dd class="col-sm-8">@Model.CreatedAt.ToString("yyyy-MM-dd")</dd>
                 </dl>
             </div>

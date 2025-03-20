@@ -5,7 +5,7 @@
 }
 
 <div class="container max-w-1400px">
-    <h1 class="text-center  my-5">@ViewData["Title"]</h1>
+    <h1 class="text-center my-5">@ViewData["Title"]</h1>
 
     <div class="table-responsive">
         <table class="table">
@@ -65,7 +65,7 @@
                         @Html.DisplayFor(modelItem => item.Handeled)
                     </td>
                     <td>
-                        <a class="btn btn-success btn-sm mb-2" asp-action="Edit" asp-route-id="@item.Id">Redigera</a> 
+                        <a class="btn btn-success btn-sm mb-2" asp-action="Edit" asp-route-id="@item.Id">Hantera</a> 
                             <br>
                             <a class="btn btn-info btn-sm mb-2" asp-action="Details" asp-route-id="@item.Id">Detaljer</a> 
                             <br>
