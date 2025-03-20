@@ -10,7 +10,7 @@
 
 
 <div class="container mt-5 max-w-1100px mx-auto">
-    <div class="row mb-4">
+    <div class="row mb-4 max-w-800 mx-auto">
         <div class="col-md-6 mb-4 mb-md-0">
             <img src="~/dogImages/@Model.ImageName" class="img-fluid rounded" alt="@Model.Name">
         </div>
@@ -24,7 +24,7 @@
             <p><span class="fw-semibold text-secondary-emphasis">Uppe för adoption sedan:</span> @Model.CreatedAt.ToString("d MMMM yyyy", new System.Globalization.CultureInfo("sv-SE"))</p>
             <p><span class="fw-semibold text-secondary-emphasis">Kontaktperson:</span> @Model.CreatedBy</p>
             @if(!SignInManager.IsSignedIn(User)) {
-                <a href="@Url.Action("Create", "Application", new { dogId = (int)Model.Id, dogName = Model.Name })" class="btn btn-primary">
+                <a class="btn btn-success" href="@Url.Action("Create", "Application", new { dogId = (int)Model.Id, dogName = Model.Name })">
                     Gör en intresseanmälan
                 </a>
             }

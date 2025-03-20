@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -20,12 +21,16 @@ namespace TassarnasHusApi.Controllers
         }
 
         // GET: Application
+        [Authorize]
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Applications.Include(a => a.Dog);
+            var applicationDbContext = _context.Applications
+                .Include(a => a.Dog)
+                .OrderByDescending(a => a.CreatedAt);
             return View(await applicationDbContext.ToListAsync());
         }
 
+        [Authorize]
         // GET: Application/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -75,6 +80,7 @@ namespace TassarnasHusApi.Controllers
             return View(application);
         }
 
+        [Authorize]
         // GET: Application/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -95,11 +101,13 @@ namespace TassarnasHusApi.Controllers
             return View(application);
         }
 
+        
         // POST: Application/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Email,Message,Handeled,CreatedAt,DogId")] Application application)
         {
             if (id != application.Id)
@@ -132,6 +140,7 @@ namespace TassarnasHusApi.Controllers
         }
 
         // GET: Application/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -153,6 +162,7 @@ namespace TassarnasHusApi.Controllers
         // POST: Application/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var application = await _context.Applications.FindAsync(id);

@@ -10,6 +10,7 @@ using TassarnasHusApi.Models;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
 using SixLabors.ImageSharp.Formats.Jpeg;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TassarnasHusApi.Controllers
 {
@@ -27,6 +28,7 @@ namespace TassarnasHusApi.Controllers
         }
 
         // GET: News
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             return View(await _context.News.ToListAsync());
@@ -51,6 +53,7 @@ namespace TassarnasHusApi.Controllers
         }
 
         // GET: News/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -61,6 +64,7 @@ namespace TassarnasHusApi.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("Id,Title,Content,CreatedAt,ImageFile,CreatedBy")] News news)
         {
             if (ModelState.IsValid)
@@ -89,6 +93,7 @@ namespace TassarnasHusApi.Controllers
         }
 
         // GET: News/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -109,6 +114,7 @@ namespace TassarnasHusApi.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Content,CreatedAt,ImageFile,CreatedBy")] News news)
         {
             if (id != news.Id)
@@ -166,6 +172,7 @@ namespace TassarnasHusApi.Controllers
         }
 
         // GET: News/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -186,6 +193,7 @@ namespace TassarnasHusApi.Controllers
         // POST: News/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var news = await _context.News.FindAsync(id);
