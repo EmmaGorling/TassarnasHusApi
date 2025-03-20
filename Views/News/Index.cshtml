@@ -36,14 +36,23 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
+            @{
+                string shortContent = "";
+                if (!string.IsNullOrEmpty(item.Content)) 
+                {
+                    var words = item.Content.Split(' ').Take(30);
+                    shortContent = string.Join(" ", words) + (item.Content.Split(' ').Length > 25 ? "..." : "");
+                }
+            }
             <td>
-                @Html.DisplayFor(modelItem => item.Content)
+                
+                @Html.DisplayFor(modelItem => shortContent)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CreatedAt)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ImageName)
+                <img class="max-w-120px w-100" src="newsImages/@Html.DisplayFor(modelItem => item.ImageName)" alt="">
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CreatedBy)

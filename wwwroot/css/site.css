@@ -1,3 +1,6 @@
+@import url('./heroImage.css'); 
+@import url('./cards.css');
+
 html {
   font-size: 14px;
 }
@@ -41,15 +44,22 @@ main {
   max-width: 120px;
 }
 
-/* Hero image */
-.hero-section {
-  background: url('../images/hero.jpg') no-repeat center center;
-  background-size: cover;
-  height: 600px; /* Justera höjden efter behov */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: white;
-  position: relative;
+.max-w-800 {
+  max-width: 800px;
+}
+.max-w-1100px {
+  max-width: 1100px;
+}
+.max-w-1300px {
+  max-width: 1300px;
+}
+
+
+.w-fit-content {
+  width: fit-content;
+}
+
+.img-fluid {
+  max-height: 500px;
+  object-fit: cover; 
 }

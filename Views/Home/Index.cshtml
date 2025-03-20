@@ -6,30 +6,34 @@
 
 <div class="">
     <div class="hero-section">
-        <div class="hero-content p-2 bg-light bg-opacity-50 ">
-            <h1 class="text-danger-emphasis">Välkommen till hundvärlden!</h1>
-            <p class="text-black fw-semibold">
+        <div class="hero-content p-2 bg-light bg-opacity-50 p-3">
+            <h1 class="text-danger-emphasis fw-bold">Välkommen till hundvärlden!</h1>
+            <p class="text-black fw-semibold ">
                 Tack vare att du adopterar en hund via oss får en fyrbent vän en andra chans till ett kärleksfullt hem. 
                 Du förändrar inte bara en hunds liv – du får en trogen vän för livet!
+                <br>
+                <a asp-action="Dogs" class="btn btn-primary mt-3">Våra hundar</a>
             </p>
         </div>
     </div>
     
 
     <div>
-        <h2>Senaste nyheterna</h2>
+        <h2 class="text-center my-5 fw-semibold">Senaste nyheterna</h2>
         @if (Model != null)
             {
-                <div class="row w-100">
+                <div class="row w-100  mx-auto max-w-1300px">
                     @foreach (var news in Model)
                     {
-                        <div class="col-md-4">
-                            <div class="card mb-3">
-                                <img src="~/newsImages/@news.ImageName" class="card-img-top" alt="@news.Title">
-                                <div class="card-body">
+                        <div class="col-12 col-sm-6 col-md-3 d-flex">
+                            <div class="card mb-3 w-100 news-card">
+                                <div class="news-image-wrapper">
+                                    <img src="~/newsImages/@news.ImageName" class="card-img-top" alt="@news.Title">
+                                </div>
+                                <div class="card-body d-flex flex-column">
                                     <h5 class="card-title">@news.Title</h5>
-                                    <p>@news.CreatedAt.ToString("d MMMM yyyy", new System.Globalization.CultureInfo("sv-SE"))</p>
-                                    <a href="@Url.Action("Details", "News", new { id = news.Id })" class="btn btn-primary">Läs mer</a>
+                                    <p class="text-muted">@news.CreatedAt.ToString("d MMMM yyyy", new System.Globalization.CultureInfo("sv-SE"))</p>
+                                    <a href="@Url.Action("Details", "News", new { id = news.Id })" class="btn btn-primary mt-auto">Läs mer</a>
                                 </div>
                             </div>
                         </div>
@@ -38,7 +42,8 @@
             }
             else
             {
-                <p>Inga nyheter finns just nu.</p>
+                <p class="text-center fw-semibold">Inga nyheter finns just nu.</p>
             }
+
     </div>
 </div>

@@ -4,92 +4,53 @@
 @inject UserManager<ApplicationUser> UserManager
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = @Model.Name;
 }
 
-<h1>Details</h1>
 
-<div>
-    <h4>Dog</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Breed)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Breed)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.City)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.City)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Sex)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Sex)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Age)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Age)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Size)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Size)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Adopted)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Adopted)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreatedAt)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ImageName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ImageName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedBy)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreatedBy)
-        </dd>
-    </dl>
-</div>
-<div>
-    @if(!SignInManager.IsSignedIn(User)) {
-        <a href="@Url.Action("Create", "Application", new { dogId = (int)Model.Id, dogName = Model.Name })" class="btn btn-success">
-        Gör en intresseanmälan
-        </a>
-    } else {
-        <div>
-            <a asp-action="Edit" asp-route-id="@Model?.Id">Redigera</a> |
-            <a asp-action="Index">Tillbaka till listan</a>
+
+<div class="container mt-5 max-w-1100px mx-auto">
+    <div class="row mb-4">
+        <!-- Bild -->
+        <div class="col-md-6 mb-4 mb-md-0">
+            <img src="~/dogImages/@Model.ImageName" class="img-fluid rounded" alt="@Model.Name">
         </div>
-    }
+
+        <!-- Hundens information -->
+        <div class="col-md-6">
+            <h1 class="display-4">@Model.Name</h1>
+            <p><span class="fw-semibold text-info">Placeringsort:</span> @Model.City</p>
+            <p><span class="fw-semibold text-info">Ras:</span> @Model.Breed</p>
+            <p><span class="fw-semibold text-info">Ålder:</span> @Model.Age år</p>
+            <p><span class="fw-semibold text-info">Kön:</span> @Model.Sex</p>
+            <p><span class="fw-semibold text-info">Uppe för adoption sedan:</span> @Model.CreatedAt.ToString("d MMMM yyyy", new System.Globalization.CultureInfo("sv-SE"))</p>
+            <p><span class="fw-semibold text-info">Kontaktperson:</span> @Model.CreatedBy</p>
+            @if(!SignInManager.IsSignedIn(User)) {
+                <a href="@Url.Action("Create", "Application", new { dogId = (int)Model.Id, dogName = Model.Name })" class="btn btn-info">
+                    Gör en intresseanmälan
+                </a>
+            }
+        </div>
+    </div>
+
+    <!-- Beskrivning -->
+    <div class="mb-4 max-w-800">
+        <h5 class="fw-semibold text-info">Om @Model.Name:</h5>
+        <p>@Model.Description</p>
+    </div>
+
+    <!-- Intresseanmälan om inte inloggad -->
+    
+
+    <!-- Återvända knappar -->
+    <div class="mt-4">
+        @if(!SignInManager.IsSignedIn(User)) {
+            <a asp-controller="Home" asp-action="Dogs" class="btn btn-primary">Tillbaka till hundarna</a>
+        } else {
+            <div>
+                <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning">Redigera</a>
+                <a asp-action="Index" class="btn btn-secondary">Tillbaka till listan</a>
+            </div>
+        }
+    </div>
 </div>

@@ -5,45 +5,45 @@
 }
 
 <div>
-    <h1>@ViewData["Title"]</h1>
+    <h1 class="text-center fx-bold my-5">@ViewData["Title"]</h1>
 
     @if (Model != null)
+    {
+        <div class="row w-100 mx-auto max-w-1300px">
+            @foreach (var dog in Model)
             {
-                <div class="row w-100">
-                    @foreach (var dog in Model)
-                    {
-                        <div class="col-md-4">
-                            <div class="card mb-3">
-                                <img src="~/dogImages/@dog.ImageName" class="card-img-top" alt="@dog.Name">
-                                <div class="card-body">
-                                    <p>@dog.City</p>
-                                    <h4 class="card-title">@dog.Name</h4>
-                                    <p><span>Ras:</span> @dog.Breed</p>
-                                    <p><span>Ålder:</span> @dog.Age år</p>
-                                    <p><span>Kön:</span> @dog.Sex</p>
-                                    @{
-                                        string shortDescription = "";
-                                        if (!string.IsNullOrEmpty(dog.Description)) 
-                                        {
-                                            var words = dog.Description.Split(' ').Take(30);
-                                            shortDescription = string.Join(" ", words) + (dog.Description.Split(' ').Length > 25 ? "..." : "");
-                                        }
-                                    }
-
-                                    <p>
-                                        <span>Om @dog.Name</span>
-                                        <br>  
-                                        @shortDescription
-                                    </p>
-                                    <a asp-controller="Dog" asp-action="Details" asp-route-id="@dog.Id" class="btn btn-primary">Läs mer</a>
-                                </div>
-                            </div>
+                <div class="col-12 col-sm-6 col-md-3 d-flex">
+                    <div class="card mb-3 w-100 dog-card">
+                        <div class="dog-image-wrapper">
+                            <img src="~/dogImages/@dog.ImageName" class="card-img-top" alt="@dog.Name">
                         </div>
-                    }
+                        <div class="card-body d-flex flex-column">
+                            <p class="text-muted mb-1">@dog.City</p>
+                            <h4 class="card-title">@dog.Name</h4>
+                            <p><span class="fw-semibold text-info">Ras:</span> @dog.Breed</p>
+                            <p><span class="fw-semibold text-info">Ålder:</span> @dog.Age år</p>
+                            <p><span class="fw-semibold text-info">Kön:</span> @dog.Sex</p>
+                            @{
+                                string shortDescription = "";
+                                if (!string.IsNullOrEmpty(dog.Description)) 
+                                {
+                                    var words = dog.Description.Split(' ').Take(20);
+                                    shortDescription = string.Join(" ", words) + (dog.Description.Split(' ').Length > 20 ? "..." : "");
+                                }
+                            }
+                            <p class="dog-description">
+                                <span class="fw-semibold text-info">Om @dog.Name:</span> <br>  
+                                @shortDescription
+                            </p>
+                            <a asp-controller="Dog" asp-action="Details" asp-route-id="@dog.Id" class="btn btn-primary mt-auto">Läs mer</a>
+                        </div>
+                    </div>
                 </div>
             }
-            else
-            {
-                <p>Inga hundar finns just nu.</p>
-            }
+        </div>
+    }
+    else
+    {
+        <p class="text-center fw-semibold">Inga hundar finns just nu.</p>
+    }
 </div>

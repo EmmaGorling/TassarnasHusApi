@@ -1,14 +1,11 @@
 @model TassarnasHusApi.Models.News
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Lägg till nyhet";
 }
 
-<h1>Create</h1>
-
-<h4>News</h4>
-<hr />
-<div class="row">
+<div>
+    <h1>@ViewData["Title"]</h1>
     <div class="col-md-4">
         <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -19,7 +16,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="Content" class="control-label"></label>
-                <input asp-for="Content" class="form-control" />
+                <textarea rows=6 asp-for="Content" class="form-control">
+                </textarea>
                 <span asp-validation-for="Content" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -28,15 +26,16 @@
                 <span asp-validation-for="ImageFile" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Lägg till" class="btn btn-primary" />
             </div>
         </form>
     </div>
+    <div>
+        <a asp-action="Index">Tillbaka till listan</a>
+    </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

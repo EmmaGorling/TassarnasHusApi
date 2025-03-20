@@ -1,0 +1,40 @@
+.hero-section {
+    background: url('../images/hero.jpg') no-repeat center center;
+    background-size: cover;
+    height: 600px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    color: white;
+    position: relative;
+}
+
+.hero-content {
+    backdrop-filter: blur(5px);
+    padding: 20px;
+    width: 100%;
+}
+
+.hero-content p {
+    max-width: 40ch;
+    margin: 0 auto 0 0;  
+}
+
+@media (min-width: 800px) { /* För större skärmar */
+    .hero-section {
+        align-items: center;
+        justify-content: flex-start;
+        padding-left: 5%;
+    }
+
+    .hero-content {
+        max-width: 40%;
+        border-radius: 10px;
+        margin-top: auto;
+        margin-bottom: 2em;
+    }
+
+    .hero-content h1 {
+        font-size: 2em;
+    }
+}
