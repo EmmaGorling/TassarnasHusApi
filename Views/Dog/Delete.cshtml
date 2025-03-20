@@ -1,87 +1,64 @@
 @model TassarnasHusApi.Models.Dog
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Ta bort hund";
 }
 
-<h1>Delete</h1>
+<div class="container max-w-800 mx-auto">
+    <h1 class="text-danger my-4  text-center">@ViewData["Title"]</h1>
+    <h3 class="mb-4  text-center">Är du säker på att du vill ta bort denna hund?</h3>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Dog</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Breed)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Breed)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.City)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.City)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Sex)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Sex)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Age)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Age)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Size)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Size)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Adopted)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Adopted)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreatedAt)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ImageName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ImageName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedBy)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreatedBy)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
+    <div class="card shadow p-4 mb-4">
+        <div class="row">
+            <div class="col-md-6">
+                @if (!string.IsNullOrEmpty(Model.ImageName))
+                {
+                    <img src="~/dogImages/@Model.ImageName" alt="Bild på @Model.Name" class="img-fluid rounded shadow-sm" style="max-width: 100%; height: auto;" />
+                }
+                else
+                {
+                    <p class="text-muted">Ingen bild tillgänglig</p>
+                }
+            </div>
+            <div class="col-md-6">
+                <dl class="row">
+                    <dt class="col-sm-4 fw-bold text-info">Namn:</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Name)</dd>
+
+                    <dt class="col-sm-4 fw-bold text-info">Ras:</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Breed)</dd>
+
+                    <dt class="col-sm-4 fw-bold text-info">Stad:</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.City)</dd>
+
+                    <dt class="col-sm-4 fw-bold text-info">Kön:</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Sex)</dd>
+
+                    <dt class="col-sm-4 fw-bold text-info">Ålder:</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Age)</dd>
+
+                    <dt class="col-sm-4 fw-bold text-info">Storlek:</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Size)</dd>
+
+                    <dt class="col-sm-4 fw-bold text-info">Adopterad:</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Adopted)</dd>
+
+                    <dt class="col-sm-4 fw-bold text-info">Beskrivning:</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Description)</dd>
+
+                    <dt class="col-sm-4 fw-bold text-info">Skapad av:</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.CreatedBy)</dd>
+
+                    <dt class="col-sm-4 fw-bold text-info">Tillagd:</dt>
+                    <dd class="col-sm-8">@Model.CreatedAt.ToString("yyyy-MM-dd")</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+
+    <form asp-action="Delete" class="mb-3">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <button type="submit" class="btn btn-danger me-2">Ta bort</button>
+        <a asp-action="Index" class="btn btn-primary">Avbryt</a>
     </form>
 </div>

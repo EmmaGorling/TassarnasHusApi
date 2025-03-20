@@ -43,7 +43,9 @@ main {
 .max-w-120px {
   max-width: 120px;
 }
-
+.max-w-500px {
+  max-width: 500px;
+}
 .max-w-800 {
   max-width: 800px;
 }
@@ -53,7 +55,9 @@ main {
 .max-w-1300px {
   max-width: 1300px;
 }
-
+.max-w-1400px {
+  max-width: 1400px;
+}
 
 .w-fit-content {
   width: fit-content;

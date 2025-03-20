@@ -4,59 +4,77 @@
     ViewData["Title"] = "Intresseanmälningar";
 }
 
-<h1>@ViewData["Title"]</h1>
+<div class="container max-w-1400px">
+    <h1 class="text-center  my-5">@ViewData["Title"]</h1>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Message)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Handeled)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedAt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Dog)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Message)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Handeled)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Dog.Breed)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Message)
+                    </th>
+                    
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreatedAt)
+                    </th>
+                    <th>
+                        Hund
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Handeled)
+                    </th>
+                    <th>Åtgärder</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @{
+                            string shortMessage = "";
+                            if (!string.IsNullOrEmpty(item.Message)) 
+                            {
+                                var words = item.Message.Split(' ').Take(30);
+                                shortMessage = string.Join(" ", words) + (item.Message.Split(' ').Length > 30 ? "..." : "");
+                            }
+                        }
+                        <!-- Display the short message -->
+                        @shortMessage
+                    </td>
+                    <td>
+                        <!-- Format the CreatedAt date as yyyy-MM-dd -->
+                        @item.CreatedAt.ToString("yyyy-MM-dd")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Dog.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Handeled)
+                    </td>
+                    <td>
+                        <a class="btn btn-success btn-sm mb-2" asp-action="Edit" asp-route-id="@item.Id">Redigera</a> 
+                            <br>
+                            <a class="btn btn-info btn-sm mb-2" asp-action="Details" asp-route-id="@item.Id">Detaljer</a> 
+                            <br>
+                            <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.Id">Radera</a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+

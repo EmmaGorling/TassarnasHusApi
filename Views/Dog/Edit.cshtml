@@ -1,72 +1,69 @@
 @model TassarnasHusApi.Models.Dog
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Redigera hund";
 }
 
-<h1>Edit</h1>
+<div class="container max-w-1100px mx-auto">
+    <h1 class="text-center my-5">@ViewData["Title"]</h1>
+    <form class="w-100 max-w-800 mx-auto mb-5" asp-action="Edit" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" />
 
-<h4>Dog</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Breed" class="control-label"></label>
-                <input asp-for="Breed" class="form-control" />
-                <span asp-validation-for="Breed" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="City" class="control-label"></label>
-                <input asp-for="City" class="form-control" />
-                <span asp-validation-for="City" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Sex" class="control-label"></label>
-                <input asp-for="Sex" class="form-control" />
-                <span asp-validation-for="Sex" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Age" class="control-label"></label>
-                <input asp-for="Age" class="form-control" />
-                <span asp-validation-for="Age" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Size" class="control-label"></label>
-                <input asp-for="Size" class="form-control" />
-                <span asp-validation-for="Size" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Adopted" /> @Html.DisplayNameFor(model => model.Adopted)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="ImageFile" class="control-label"></label>
-                <input asp-for="ImageFile" class="form-control" />
-                <span asp-validation-for="ImageFile" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        <div class="form-group my-3">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group my-3">
+            <label asp-for="Breed" class="control-label"></label>
+            <input asp-for="Breed" class="form-control" />
+            <span asp-validation-for="Breed" class="text-danger"></span>
+        </div>
+        <div class="form-group my-3">
+            <label asp-for="City" class="control-label"></label>
+            <input asp-for="City" class="form-control" />
+            <span asp-validation-for="City" class="text-danger"></span>
+        </div>
+        <div class="form-group my-3">
+            <label asp-for="Sex" class="control-label"></label>
+            <input asp-for="Sex" class="form-control" />
+            <span asp-validation-for="Sex" class="text-danger"></span>
+        </div>
+        <div class="form-group my-3">
+            <label asp-for="Age" class="control-label"></label>
+            <input asp-for="Age" class="form-control" />
+            <span asp-validation-for="Age" class="text-danger"></span>
+        </div>
+        <div class="form-group my-3">
+            <label asp-for="Size" class="control-label"></label>
+            <input asp-for="Size" class="form-control" />
+            <span asp-validation-for="Size" class="text-danger"></span>
+        </div>
+        <div class="form-group my-3">
+            <label asp-for="Description" class="control-label"></label>
+            <textarea rows=6 asp-for="Description" class="form-control">
+            </textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        
+        <div class="form-group my-3">
+            <label asp-for="ImageFile" class="control-label"></label>
+            <input asp-for="ImageFile" class="form-control" accept="image/*" />
+            <span asp-validation-for="ImageFile" class="text-danger"></span>
+        </div>
+        <div class="form-group form-check my-3">
+            <label class="form-check-label">
+                <input class="form-check-input" asp-for="Adopted" /> @Html.DisplayNameFor(model => model.Adopted)
+            </label>
+        </div>
+        <div class="form-group text-center mt-4">
+            <input type="submit" value="Spara ändringar" class="btn btn-success" />
+        </div>
+    </form>
+    <div>
+        <a class="btn btn-primary" asp-action="Index">Tillbaka till listan</a>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

@@ -1,68 +1,78 @@
 @model IEnumerable<TassarnasHusApi.Models.News>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Nyheter & aktuellt";
 }
 
-<h1>Index</h1>
+<div class="container max-w-1400px">
+    <h1 class="text-center fx-bold my-5">@ViewData["Title"]</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Content)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedAt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImageName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedBy)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            @{
-                string shortContent = "";
-                if (!string.IsNullOrEmpty(item.Content)) 
-                {
-                    var words = item.Content.Split(' ').Take(30);
-                    shortContent = string.Join(" ", words) + (item.Content.Split(' ').Length > 25 ? "..." : "");
-                }
+    <p>
+        <a class="btn btn-primary" asp-action="Create">Lägg till</a>
+    </p>
+
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Title)
+                    </th>
+                    <th>
+                        Bild
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Content)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreatedAt)
+                    </th>
+                    <th>
+                        Skapad av
+                    </th>
+                    <th>Åtgärder</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        <!-- Display the image, with a max width of 120px -->
+                        <img class="max-w-120px w-100" src="newsImages/@Html.DisplayFor(modelItem => item.ImageName)" alt="@item.Title">
+                    </td>
+                    <td>
+                        @{
+                            // Begränsa innehållet till max 30 ord
+                            string shortContent = "";
+                            if (!string.IsNullOrEmpty(item.Content)) 
+                            {
+                                var words = item.Content.Split(' ').Take(20);
+                                shortContent = string.Join(" ", words) + (item.Content.Split(' ').Length > 20 ? "..." : "");
+                            }
+                        }
+                        <!-- Display the short content -->
+                        @shortContent
+                    </td>
+                    <td>
+                        <!-- Format the CreatedAt date as yyyy-MM-dd -->
+                        @item.CreatedAt.ToString("yyyy-MM-dd")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedBy)
+                    </td>
+                    <td>
+                        <a class="btn btn-success btn-sm mb-2" asp-action="Edit" asp-route-id="@item.Id">Redigera</a> 
+                        <br>
+                        <a class="btn btn-info btn-sm mb-2" asp-action="Details" asp-route-id="@item.Id">Detaljer</a> 
+                        <br>
+                        <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.Id">Radera</a>
+                    </td>
+                </tr>
             }
-            <td>
-                
-                @Html.DisplayFor(modelItem => shortContent)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedAt)
-            </td>
-            <td>
-                <img class="max-w-120px w-100" src="newsImages/@Html.DisplayFor(modelItem => item.ImageName)" alt="">
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedBy)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+            </tbody>
+        </table>
+    </div>
+</div>
