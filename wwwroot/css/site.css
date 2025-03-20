@@ -15,14 +15,8 @@ html {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-  margin-bottom: 60px;
-  height: 100%;
+.body-wrapper {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -57,6 +51,10 @@ main {
 }
 .max-w-1400px {
   max-width: 1400px;
+}
+
+.w-25ch {
+  width: 25ch;
 }
 
 .w-fit-content {

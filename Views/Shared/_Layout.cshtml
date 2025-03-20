@@ -15,13 +15,15 @@
     <link rel="stylesheet" href="~/TassarnasHusApi.styles.css" asp-append-version="true" />
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="@Url.Content("~/favicon.svg")" />
+    <script src="https://kit.fontawesome.com/8726bca3f8.js" crossorigin="anonymous"></script>
 </head>
 <body>
+    <div class="body-wrapper">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow ">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                    TassarnasHusApi
+                    <img src="~/images/logo.svg" alt="TassarnasHusApi Logo" style="height: auto; width: 120px;" />
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -31,23 +33,23 @@
                     <ul class="navbar-nav flex-grow-1">
                         @if(!SignInManager.IsSignedIn(User)) {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Startsida</a>
+                                <a class="nav-link link-primary" asp-area="" asp-controller="Home" asp-action="Index">Startsida</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Dogs">Hundar</a>
+                                <a class="nav-link  link-primary" asp-area="" asp-controller="Home" asp-action="Dogs">Hundarna</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="News">Aktuellt</a>
+                                <a class="nav-link link-primary" asp-area="" asp-controller="Home" asp-action="News">Aktuellt</a>
                             </li>
                         } else {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Dog" asp-action="Index">Hundar</a>
+                                <a class="nav-link link-primary" asp-area="" asp-controller="Dog" asp-action="Index">Hundar</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Application" asp-action="Index">Intresseanmälningar</a>
+                                <a class="nav-link link-primary" asp-area="" asp-controller="Application" asp-action="Index">Intresseanmälningar</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="News" asp-action="Index">Nyheter</a>
+                                <a class="nav-link link-primary" asp-area="" asp-controller="News" asp-action="Index">Nyheter</a>
                             </li>
                         }
                         
@@ -63,14 +65,50 @@
         @RenderBody()
     </main>
 
-    <footer class="border-top">
-        <div class="container">
+    <footer class="border-top bg-primary text-light pt-5 mt-5">
+        <div class="container d-flex justify-content-between flex-column flex-md-row max-w-800 mx-auto">
+            <div class="w-25ch mx-auto mx-md-0 mb-4 text-center text-md-start">
+                <h4>Kontakt</h4>
+                <p class="px-0">
+                    Tel: 0123-456 789
+                    <br>
+                    exempel@@tassarnashus.se
+                </p>
+                
+                <h5>Tassarnas Hus</h5>
+                <p class="px-0">
+                    Hittepåvägen 5
+                    <br>
+                    123 45 Hittepåberg
+                </p>
+            </div>
+                
+            <div class=" w-25ch  mb-4 mx-auto mx-md-0 text-center text-md-center">
+                <h4>Följ oss</h4>
+                <div class="d-flex w-75 my-5 justify-content-between mx-auto">
+                    <i class="fa-brands fa-square-facebook fa-xl"></i>
+                    <i class="fa-brands fa-instagram fa-xl"></i>
+                    <i class="fa-brands fa-tiktok fa-xl"></i>
+                </div>
+                <a asp-controller="Home" asp-action="Index">
+                    <img src="~/images/logo-white.svg" alt="Tassarnas Hus Logo" style="height: auto; width: 120px; color: white;" />
+                </a>
+            </div>
             @if (!SignInManager.IsSignedIn(User)) {
-                        <partial name="_LoginPartial" />
+                        <div class="w-25ch  mb-4 mx-auto mx-md-0 text-center text-md-end">
+                            <h4>Logga in</h4>
+                            <partial name="_LoginPartial" />
+                        </div>
+                    } else {
+                        <div class="w-25ch  mb-4 mx-auto mx-md-0 text-center text-md-end">
+                            <p>Hejsan!</p>
+                        </div>
                     }
-            &copy; 2025 - TassarnasHusApi - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            
         </div>
+        <p class="text-center mt-3 py-1">&copy; 2025 - TassarnasHus | <a class="link link-light" href="mailto:adahl.gorling@gmail.com">Emma Ådahl Görling</a></p>
     </footer>
+    </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
