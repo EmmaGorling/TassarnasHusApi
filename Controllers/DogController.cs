@@ -33,7 +33,7 @@ namespace TassarnasHusApi.Controllers
         [Authorize]
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Dogs.ToListAsync());
+            return View(await _context.Dogs.OrderByDescending(d=> d.CreatedAt).ToListAsync());
         }
 
         // GET: Dog/Details/5
