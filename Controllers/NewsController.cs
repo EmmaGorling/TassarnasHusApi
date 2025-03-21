@@ -31,7 +31,7 @@ namespace TassarnasHusApi.Controllers
         [Authorize]
         public async Task<IActionResult> Index()
         {
-            return View(await _context.News.ToListAsync());
+            return View(await _context.News.OrderByDescending(n=> n.CreatedAt).ToListAsync());
         }
 
         // GET: News/Details/5

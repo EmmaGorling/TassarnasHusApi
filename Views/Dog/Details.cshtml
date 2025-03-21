@@ -22,19 +22,20 @@
             <p><span class="fw-semibold text-secondary-emphasis">Ålder:</span> @Model.Age år</p>
             <p><span class="fw-semibold text-secondary-emphasis">Kön:</span> @Model.Sex</p>
             <p><span class="fw-semibold text-secondary-emphasis">Uppe för adoption sedan:</span> @Model.CreatedAt.ToString("d MMMM yyyy", new System.Globalization.CultureInfo("sv-SE"))</p>
-            <p><span class="fw-semibold text-secondary-emphasis">Kontaktperson:</span> @Model.CreatedBy</p>
+            <p><span class="fw-semibold text-secondary-emphasis">Kontaktperson:</span> <a href="mailto:@Model.CreatedBy">@Model.CreatedBy</a></p>
             @if(!SignInManager.IsSignedIn(User)) {
                 <a class="btn btn-success" href="@Url.Action("Create", "Application", new { dogId = (int)Model.Id, dogName = Model.Name })">
                     Gör en intresseanmälan
                 </a>
             }
         </div>
-    </div>
-
-    <div class="mb-4 max-w-800">
+        <div class="mb-4 max-w-800">
         <h5 class="fw-semibold text-secondary-emphasis fs-3">Om @Model.Name:</h5>
         <p>@Model.Description</p>
     </div>
+    </div>
+
+    
 
 
     <div class="mt-4">
