@@ -21,6 +21,7 @@
             <p><span class="fw-semibold text-secondary-emphasis">Ras:</span> @Model.Breed</p>
             <p><span class="fw-semibold text-secondary-emphasis">Ålder:</span> @Model.Age år</p>
             <p><span class="fw-semibold text-secondary-emphasis">Kön:</span> @Model.Sex</p>
+            <p><span class="fw-semibold text-secondary-emphasis">Storlek:</span> @Model.Size</p>
             <p><span class="fw-semibold text-secondary-emphasis">Uppe för adoption sedan:</span> @Model.CreatedAt.ToString("d MMMM yyyy", new System.Globalization.CultureInfo("sv-SE"))</p>
             <p><span class="fw-semibold text-secondary-emphasis">Kontaktperson:</span> <a href="mailto:@Model.CreatedBy">@Model.CreatedBy</a></p>
             @if(!SignInManager.IsSignedIn(User)) {
