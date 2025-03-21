@@ -43,9 +43,6 @@
                     <dt class="col-sm-4 fw-bold text-secondary-emphasis">Adopterad:</dt>
                     <dd class="col-sm-8">@Html.DisplayFor(model => model.Adopted)</dd>
 
-                    <dt class="col-sm-4 fw-bold text-secondary-emphasis">Beskrivning:</dt>
-                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Description)</dd>
-
                     <dt class="col-sm-4 fw-bold text-secondary-emphasis">Skapad av:</dt>
                     <dd class="col-sm-8">@Html.DisplayFor(model => model.CreatedBy)</dd>
 
@@ -53,6 +50,10 @@
                     <dd class="col-sm-8">@Model.CreatedAt.ToString("yyyy-MM-dd")</dd>
                 </dl>
             </div>
+        </div>
+        <div class="">
+            <h5 class="fw-bold text-secondary-emphasis">Beskrivning:</h5>
+            <p style="white-space: pre-line !important;">@Html.DisplayFor(model => model.Description)</p>
         </div>
     </div>
 
