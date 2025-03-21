@@ -20,19 +20,19 @@
                         <div class="card-body d-flex flex-column">
                             <p class="text-muted mb-1">@dog.City</p>
                             <h4 class="card-title">@dog.Name</h4>
-                            <p><span class="fw-semibold text-info">Ras:</span> @dog.Breed</p>
-                            <p><span class="fw-semibold text-info">Ålder:</span> @dog.Age år</p>
-                            <p><span class="fw-semibold text-info">Kön:</span> @dog.Sex</p>
+                            <p><span class="fw-semibold text-secondary-emphasis">Ras:</span> @dog.Breed</p>
+                            <p><span class="fw-semibold text-secondary-emphasis">Ålder:</span> @dog.Age år</p>
+                            <p><span class="fw-semibold text-secondary-emphasis">Kön:</span> @dog.Sex</p>
                             @{
                                 string shortDescription = "";
                                 if (!string.IsNullOrEmpty(dog.Description)) 
                                 {
-                                    var words = dog.Description.Split(' ').Take(20);
-                                    shortDescription = string.Join(" ", words) + (dog.Description.Split(' ').Length > 20 ? "..." : "");
+                                    var words = dog.Description.Split(' ').Take(15);
+                                    shortDescription = string.Join(" ", words) + (dog.Description.Split(' ').Length > 15 ? "..." : "");
                                 }
                             }
                             <p class="dog-description">
-                                <span class="fw-semibold text-info">Om @dog.Name:</span> <br>  
+                                <span class="fw-semibold text-secondary-emphasis">Om @dog.Name:</span> <br>  
                                 @shortDescription
                             </p>
                             <a asp-controller="Dog" asp-action="Details" asp-route-id="@dog.Id" class="btn btn-primary mt-auto">Läs mer</a>

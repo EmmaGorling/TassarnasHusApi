@@ -23,13 +23,13 @@
 
 /* Dog-cards */
 .dog-card {
-    height: 35em; /* Anpassad höjd */
+    height: 38em; /* Anpassad höjd */
     display: flex;
     flex-direction: column;
 }
 
 .dog-card .dog-image-wrapper {
-    height: 30%; /* Bilden tar upp 50% av kortets höjd */
+    height: 40%; /* Bilden tar upp 50% av kortets höjd */
     overflow: hidden;
 }
 
@@ -40,7 +40,7 @@
 }
 
 .dog-card .card-body {
-    height: 70%;
+    height: 60%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
