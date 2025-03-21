@@ -40,7 +40,6 @@
                         <td>@Html.DisplayFor(modelItem => item.City)</td>
                         <td>@Html.DisplayFor(modelItem => item.Sex)</td>
                         <td>
-                            @* Visar bara en kort beskrivning, max 100 tecken *@
                             @if (!string.IsNullOrEmpty(item.Description))
                             {
                                 var shortDescription = item.Description.Length > 100 ? item.Description.Substring(0, 100) + "..." : item.Description;

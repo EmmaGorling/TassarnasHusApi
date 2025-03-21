@@ -31,6 +31,7 @@ public class HomeController : Controller
     {
         var dogs = await _context.Dogs
             .Where(d => d.Adopted == false)
+            .OrderByDescending(d => d.CreatedAt)
             .ToListAsync();
 
         return View(dogs);
@@ -40,6 +41,7 @@ public class HomeController : Controller
     public async Task<IActionResult> News()
     {
         var news = await _context.News
+            .OrderByDescending(n => n.CreatedAt)
             .ToListAsync();
         
         return View(news);
