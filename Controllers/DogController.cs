@@ -132,6 +132,7 @@ namespace TassarnasHusApi.Controllers
 
             if (ModelState.IsValid)
             {
+                dog.CreatedBy = existingDog.CreatedBy;
                 // If new image is added
                 if (dog.ImageFile != null) {
                     // Delete old image, if not "default.png"

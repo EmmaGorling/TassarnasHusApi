@@ -128,6 +128,7 @@ namespace TassarnasHusApi.Controllers
 
             if (ModelState.IsValid)
             {
+                news.CreatedBy = existingNews.CreatedBy;
                 // If new image is added
                 if (news.ImageFile != null) {
                     // Delete old image, if not "default.png"
